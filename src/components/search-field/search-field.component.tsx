@@ -4,7 +4,11 @@ import TextField from "@material-ui/core/TextField";
 
 import "./search-field.styles.scss";
 
-const SearchField = ({onSearchChange}) => (
+interface ISearchFieldProps {
+  onSearchChange(event: React.ChangeEvent<HTMLInputElement>): void
+}
+
+const SearchField = ({onSearchChange}: ISearchFieldProps) => (
   <div className="search-field">
     <TextField 
       id="outlined-basic" 

@@ -5,9 +5,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
+import {ICat} from "../../App";
+
 import "./cat-card.styles.scss";
 
-const CatCard = ({member}) => (
+const CatCard = ({member}: {member: ICat}) => (
   <Card className="cat-card">
     <CardContent>
       <CardMedia

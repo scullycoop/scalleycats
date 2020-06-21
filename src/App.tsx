@@ -1,18 +1,34 @@
 import React from "react";
-
+// import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 import CardList from "./components/card-list/card-list.component";
 import SearchField from "./components/search-field/search-field.component";
 
+// import {setSearchField} from "./redux/actions";
+
 import "./App.scss";
 
 import {coolCats} from "./coolCats";
 
-class App extends React.Component {
-  constructor() {
-    super();
+export interface ICat { 
+  name: string; 
+} 
+
+interface IAppProps {  
+} 
+
+interface IAppState {
+  semester: string;
+  members: Array<ICat>; 
+  searchInput: string;
+  sortBy: string;
+}
+
+class App extends React.Component<IAppProps, IAppState> {
+  constructor(props: IAppProps) {
+    super(props);
 
     this.state = {
       semester: "",
@@ -22,7 +38,7 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.setState({
       semester: coolCats[0].semester,
       members: coolCats[0].members,
@@ -31,17 +47,17 @@ class App extends React.Component {
     });
   }
 
-  onSearchChange = (event) => {
+  onSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({searchInput: event.target.value})
   }
 
-  render() {
-    const filteredCats = this.state.members.filter((member) => (
+  render(): JSX.Element {
+    const filteredCats: Array<ICat> = this.state.members.filter((member) => (
       member.name.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
       String(member.name.length).includes(this.state.searchInput.toLowerCase())
     ));
 
-    let filteredAndSortedCats;
+    let filteredAndSortedCats: Array<ICat>;
     switch(this.state.sortBy) {
       case "alphabetical":
         filteredAndSortedCats = filteredCats.sort((a, b) => a.name.localeCompare(b.name));
@@ -113,5 +129,15 @@ class App extends React.Component {
     );
   }
 }
+
+// const mapStateToProps = (state: any) => ({
+//   searchInput: state.searchInput
+// })
+
+// const mapDispatchToProps = (dispatch: any) => ({
+//   onSearchChange: (event: any) => dispatch(setSearchField(event.target.value))
+// })
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default App;
