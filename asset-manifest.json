@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/scalleycats/static/css/main.bfffda0a.chunk.css",
-    "main.js": "/scalleycats/static/js/main.8388eb8c.chunk.js",
-    "main.js.map": "/scalleycats/static/js/main.8388eb8c.chunk.js.map",
+    "main.js": "/scalleycats/static/js/main.52572241.chunk.js",
+    "main.js.map": "/scalleycats/static/js/main.52572241.chunk.js.map",
     "runtime-main.js": "/scalleycats/static/js/runtime-main.d950289d.js",
     "runtime-main.js.map": "/scalleycats/static/js/runtime-main.d950289d.js.map",
     "static/js/2.0e874f99.chunk.js": "/scalleycats/static/js/2.0e874f99.chunk.js",
     "static/js/2.0e874f99.chunk.js.map": "/scalleycats/static/js/2.0e874f99.chunk.js.map",
     "index.html": "/scalleycats/index.html",
-    "precache-manifest.87d4105850a3be58fa590ab85207980e.js": "/scalleycats/precache-manifest.87d4105850a3be58fa590ab85207980e.js",
+    "precache-manifest.714859e22ac22313cd354c067fd3ef5e.js": "/scalleycats/precache-manifest.714859e22ac22313cd354c067fd3ef5e.js",
     "service-worker.js": "/scalleycats/service-worker.js",
     "static/css/main.bfffda0a.chunk.css.map": "/scalleycats/static/css/main.bfffda0a.chunk.css.map",
     "static/js/2.0e874f99.chunk.js.LICENSE.txt": "/scalleycats/static/js/2.0e874f99.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.d950289d.js",
     "static/js/2.0e874f99.chunk.js",
     "static/css/main.bfffda0a.chunk.css",
-    "static/js/main.8388eb8c.chunk.js"
+    "static/js/main.52572241.chunk.js"
   ]
 }
