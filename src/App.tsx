@@ -47,9 +47,10 @@ class App extends React.Component<IAppProps, IAppState> {
   }
 
   componentDidMount(): void {
-    fetch("https://meowfacts.herokuapp.com/")
+    fetch("https://meowfacts.herokuapp.com")
       .then((res) => res.json())
-      .then(data => this.setState({meowFact: data.data[0]}))
+      .then((data) => this.setState({meowFact: data.data[0]}))
+      .catch((err) => console.log(err))
 
     this.setState({
       semester: coolCats[0].semester,
