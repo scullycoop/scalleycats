@@ -1,29 +1,35 @@
 import React from "react";
-// import {connect} from "react-redux";
+import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 import CardList from "./components/card-list/card-list.component";
 import SearchField from "./components/search-field/search-field.component";
 
-// import {setSearchField} from "./redux/actions";
+import {setSearchField} from "./redux/search/search-actions";
+import {toggleSortMethod} from "./redux/sort/sort-actions";
 
 import "./App.scss";
 
 import {coolCats} from "./coolCats";
+
 
 export interface ICat { 
   name: string; 
 } 
 
 interface IAppProps {  
+  searchInput: string,
+  sortBy: string,
+  setSearchField: any,
+  toggleSortMethod: any
 } 
 
 interface IAppState {
   semester: string;
   members: Array<ICat>; 
-  searchInput: string;
-  sortBy: string;
+  // searchInput: string;
+  // sortBy: string;
 }
 
 class App extends React.Component<IAppProps, IAppState> {
@@ -33,8 +39,8 @@ class App extends React.Component<IAppProps, IAppState> {
     this.state = {
       semester: "",
       members: [],
-      searchInput: "",
-      sortBy: ""
+      // searchInput: "",
+      // sortBy: ""
     };
   }
 
@@ -42,23 +48,23 @@ class App extends React.Component<IAppProps, IAppState> {
     this.setState({
       semester: coolCats[0].semester,
       members: coolCats[0].members,
-      searchInput: "",
-      sortBy: "alphabetical"
+      // searchInput: "",
+      // sortBy: "alphabetical"
     });
   }
 
-  onSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    this.setState({searchInput: event.target.value})
-  }
+  // onSearchChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  //   this.setState({searchInput: event.target.value})
+  // }
 
   render(): JSX.Element {
     const filteredCats: Array<ICat> = this.state.members.filter((member) => (
-      member.name.toLowerCase().includes(this.state.searchInput.toLowerCase()) ||
-      String(member.name.length).includes(this.state.searchInput.toLowerCase())
+      member.name.toLowerCase().includes(this.props.searchInput.toLowerCase()) ||
+      String(member.name.length).includes(this.props.searchInput.toLowerCase())
     ));
 
     let filteredAndSortedCats: Array<ICat>;
-    switch(this.state.sortBy) {
+    switch(this.props.sortBy) {
       case "alphabetical":
         filteredAndSortedCats = filteredCats.sort((a, b) => a.name.localeCompare(b.name));
         break;
@@ -74,7 +80,7 @@ class App extends React.Component<IAppProps, IAppState> {
         <div className="App-header">
           <h1>ScAlley Cats ({this.state.semester})</h1>
           
-          <SearchField onSearchChange={this.onSearchChange} />
+          <SearchField setSearchField={this.props.setSearchField} />
 
           <br />
 
@@ -114,10 +120,10 @@ class App extends React.Component<IAppProps, IAppState> {
             aria-label="outlined primary button group" 
             disableElevation
           >
-            <Button onClick={() => this.setState({sortBy: "alphabetical"})}>
+            <Button onClick={() => this.props.toggleSortMethod("alphabetical")}>
               Sort by Name
             </Button>
-            <Button onClick={() => this.setState({sortBy: "nameLength"})}>
+            <Button onClick={() => this.props.toggleSortMethod("nameLength")}>
               Sort by Name Length
             </Button>
           </ButtonGroup>
@@ -130,14 +136,16 @@ class App extends React.Component<IAppProps, IAppState> {
   }
 }
 
-// const mapStateToProps = (state: any) => ({
-//   searchInput: state.searchInput
-// })
+const mapStateToProps = (state: any) => ({
+  searchInput: state.search.searchInput,
+  sortBy: state.sort.sortBy
+})
 
-// const mapDispatchToProps = (dispatch: any) => ({
-//   onSearchChange: (event: any) => dispatch(setSearchField(event.target.value))
-// })
+const mapDispatchToProps = (dispatch: any) => ({
+  setSearchField: (event: any) => dispatch(setSearchField(event.target.value)),
+  toggleSortMethod: (sortOption: string) => dispatch(toggleSortMethod(sortOption))
+})
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
-export default App;
+// export default App;
