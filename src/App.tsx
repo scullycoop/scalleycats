@@ -19,10 +19,10 @@ export interface ICat {
 } 
 
 interface IAppProps {  
-  searchInput: string,
-  sortBy: string,
-  setSearchField: any,
-  toggleSortMethod: any
+  searchInput: string;
+  sortBy: string;
+  setSearchField: any;
+  toggleSortMethod: any;
 } 
 
 interface IAppState {
@@ -30,6 +30,7 @@ interface IAppState {
   members: Array<ICat>; 
   // searchInput: string;
   // sortBy: string;
+  meowFact: string;
 }
 
 class App extends React.Component<IAppProps, IAppState> {
@@ -40,11 +41,16 @@ class App extends React.Component<IAppProps, IAppState> {
       semester: "",
       members: [],
       // searchInput: "",
-      // sortBy: ""
+      // sortBy: "",
+      meowFact: ""
     };
   }
 
   componentDidMount(): void {
+    fetch("https://meowfacts.herokuapp.com/")
+      .then((res) => res.json())
+      .then(data => this.setState({meowFact: data.data[0]}))
+
     this.setState({
       semester: coolCats[0].semester,
       members: coolCats[0].members,
@@ -80,6 +86,8 @@ class App extends React.Component<IAppProps, IAppState> {
         <div className="App-header">
           <h1>ScAlley Cats ({this.state.semester})</h1>
           
+          <p>{this.state.meowFact}</p>
+
           <SearchField setSearchField={this.props.setSearchField} />
 
           <br />
