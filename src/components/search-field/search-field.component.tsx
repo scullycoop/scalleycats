@@ -4,13 +4,17 @@ import TextField from "@material-ui/core/TextField";
 
 import "./search-field.styles.scss";
 
-const SearchField = ({onSearchChange}) => (
+interface ISearchFieldProps {
+  setSearchField(event: React.ChangeEvent<HTMLInputElement>): void
+}
+
+const SearchField = ({setSearchField}: ISearchFieldProps) => (
   <div className="search-field">
     <TextField 
       id="outlined-basic" 
       label="Search Cats"
       variant="outlined"
-      onChange={onSearchChange}
+      onChange={setSearchField}
     />
   </div>
 )

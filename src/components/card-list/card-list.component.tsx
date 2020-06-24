@@ -1,10 +1,12 @@
 import React from "react";
 
-import CatCard from "../../components/cat-card/cat-card.component";
+import CatCard from "../cat-card/cat-card.component";
+
+import {ICat} from "../../App";
 
 import "./card-list.styles.scss";
 
-const CardList = ({members}) => {
+const CardList = ({members}: {members: Array<ICat>}) => {
   return (
     <div className="card-list">
       {
